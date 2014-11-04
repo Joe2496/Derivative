@@ -1,0 +1,146 @@
+import java.util.Random;
+import java.util.Scanner;
+
+/**
+ * A program to test the user's knowledge of derivatives
+ * 
+ * @author Joe
+ *
+ */
+public class Derivative {
+	// Standard trigonometric functions and their derivatives
+	static String[] f = { "sin(x)", "cos(x)", "tan(x)", "csc(x)", "sec(x)","cot(x)" };
+	static String[] fp = { "cos(x)", "-sin(x)", "sec²(x)", "-csc(x)cot(x)", "sec(x)tan(x)", "-csc²(x)" };
+
+	// Hyperbolic trigonometric functions and their derivatives
+	static String[] h = { "sinh(x)", "cosh(x)", "tanh(x)", "csch(x)", "sech(x)", "coth(x)" };
+	static String[] hp = { "cosh(x)", "sinh(x)", "sech²(x)", "-csch(x)coth(x)", "sech(x)tanh(x)", "-csch²(x)" };
+
+	static Random generate = new Random();
+	static Scanner scan = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		System.out
+				.println("WELCOME TO DERIVATIVE TEST!\n\nYou may need this for certain functions | ² |");
+		header();
+		game();
+	}
+
+	/**
+	 * A method to create a simple header border for use in the command line
+	 */
+
+	public static void header() {
+		int headerLength = 8;
+		for (int i = 0; i < headerLength; i++) {
+			if (i < headerLength - 1) {
+				System.out.print("===---");
+			} else {
+				System.out.println("====\n");
+			}
+		}
+	}
+
+	/*
+	 * Sets the game state to include: count - number of questions asked
+	 * (starting at 1) length - total number of questions
+	 */
+	public static void game() {
+		int count;
+		int r;
+		int length = 11;
+		for (count = 1; count < length; count++) {
+			r = generate.nextInt(2);
+			System.out.print("(" + count + ") ");
+			if (r != 1)
+				standard();
+			else
+				hyperbolic();
+		}
+
+	}
+
+	/*
+	 * Prompts the user to input the derivative of a random, standard
+	 * trigonometric function
+	 */
+	public static void standard() {
+		int a = generate.nextInt(f.length);
+		int r = generate.nextInt(2);
+
+		if (r == 0) {
+			// value - randomly selected trigonometric function
+			// answer - String that corresponds to the randomly selected
+			// trigonometric function
+			String value = f[a];
+			String answer = fp[a];
+			System.out.printf("What is the derivative of %s?\n", value);
+
+			// response - the user's answer to the question
+			String response = scan.next();
+			if (response.equals(answer))
+				System.out.printf(
+						"Correct! The first derivative of %s is %s\n\n\n", value,
+						answer);
+			else
+				System.out.printf(
+						"Sorry. The first derivative of %s is %s\n\n\n", value,
+						answer);
+		} else {
+			// value - randomly selected derivative of a trigonometric function
+			// answer - String that corresponds to the randomly selected trigonometric derivative
+			String value = fp[a];
+			String answer = f[a];
+			System.out.printf("%s is the derivative of ___ ?\n", value);
+			
+			// response - the user's answer to the question
+			String response = scan.next();
+			if (response.equals(answer))
+				System.out.printf("Correct! %s is the first derivative of %s\n\n\n", value, answer);
+			else
+				System.out.printf("Sorry, %s is the first derivative of %s\n\n\n", value, answer);
+		}
+	}
+
+	/*
+	 * TODO Prompts the user to input the derivative of a random, hyperbolic
+	 * trigonometric function
+	 */
+	public static void hyperbolic() {
+		int a = generate.nextInt(h.length);
+		int r = generate.nextInt(2);
+
+		if (r == 0) {
+			// value - randomly selected hyperbolic trigonometric function
+			// answer - String that corresponds to the randomly selected
+			// hyperbolic trigonometric function
+			String value = h[a];
+			String answer = hp[a];
+			System.out.printf("What is the derivative of %s?\n", value);
+
+			// response - the user's answer to the question
+			String response = scan.next();
+			if (response.equals(answer))
+				System.out.printf(
+						"Correct! The first derivative of %s is %s\n\n\n", value,
+						answer);
+			else
+				System.out.printf(
+						"Sorry. The first derivative of %s is %s\n\n\n", value,
+						answer);
+		} else {
+			// value - randomly selected derivative of a hyperbolic trigonometric function
+			// answer - String that corresponds to the randomly selected hyperbolic trigonometric derivative
+			String value = hp[a];
+			String answer = h[a];
+			System.out.printf("%s is the derivative of ___ ?\n", value);
+			
+			// response - the user's answer to the question
+			String response = scan.next();
+			if (response.equals(answer))
+				System.out.printf("Correct! %s is the first derivative of %s\n\n\n", value, answer);
+			else
+				System.out.printf("Sorry, %s is the first derivative of %s\n\n\n", value, answer);
+		}
+	}
+}
